@@ -7,9 +7,16 @@
     <% include partials/page/header.ejs %>
     <div class="container">
 
-		<h1><%= title %></h1>
+		<h1><%= title %>--<%= pagetitle %></h1>
 		<p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem 				ipsum</p>
 	
+    <% if (typeof(users) !== 'undefined') {%>
+      <ul>
+        <% for(var i=0; i<users.length;i++) { %>
+          <li><%= users[i] %></li>
+        <% } %>
+      </ul>
+    <% } %>
 		
    </div><!-- container -->
     <% include partials/page/footer.ejs %>
