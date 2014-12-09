@@ -2,14 +2,19 @@ var express = require('express');
 
 var app = express.createServer();
 
+var recipes = require('./data/recipes').data;
+
 app.get('/', function(req, res){
   res.render('index.ejs', {title: 'Clever Kitchens'});
 });
 
+
+  
+   
 app.get('/recipes', function(req, res){
-  res.render('layout.ejs', {
-    title: 'Clever Kitchens - Recipes', 
-    body: '<h1>All Recipes</h1>'
+  res.render('recipes.ejs', {
+     title: 'Clever Kitchens - Recipe List',
+    recipes: recipes
   });
 });
 
