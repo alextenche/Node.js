@@ -1,34 +1,23 @@
 var express = require('express');
 
 var app = express.createServer();
+app.use(express.bodyParser());
 
-var recipes = require('./data/recipes').data;
+var recipes = require('./recipes.js');
 
 app.get('/', function(req, res){
   res.render('index.ejs', {title: 'Clever Kitchens'});
 });
    
-app.get('/recipes', function(req, res){
-  res.render('recipes.ejs', {
-     title: 'Clever Kitchens - Recipe List',
-    recipes: recipes
-  });
+app.get('/recipes', recipes.list);
+
+app.get('/recipes/suggest', function(req, res){
+	res.render('suggest.ejs', {title : 'Suggest a Recipe'});
 });
 
-app.get('/recipes/:title', function(req, res) {
-	var data = recipes.filter(function(recipe){
-		return(recipe.url === req.params.title);
-	});
+app.post('/recipes/suggest', recipes.suggest);
 
-	if(data.length > 0){
-		data = data[0];
-		data.title = "Clever Kitchens - Recipe";
-
-		res.render('recipe.ejs', data);
-	} else {
-		res.status(404).render('error.ejs', {title: 'Recipe Not Found'});
-	}
-});
+app.get('/recipes/:title', recipes.single);
 
 app.get('/*', function(req, res) {
   res.status(404).render('error.ejs', {title: 'Error'});
