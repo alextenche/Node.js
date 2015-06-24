@@ -1,0 +1,14 @@
+{
+  "name": "basicApp",
+  "version": "1.0.0",
+  "description": "tutorial",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Tenche",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "^4.13.0"
+  }
+}
