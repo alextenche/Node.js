@@ -1,0 +1,11 @@
+<article class="artworklist">
+	<h1> Planets Gallery </h1>
+	<p> More picture of with the planets from our Solar System. Click on them to see a larger version. </p>
+	<div class="pixgrid">
+		<% if(gallery.length > 0) { %>
+			<% for(i=0; i < gallery.length;i++) { %>
+				<img src="/images/gallery/<%= gallery[i] %>" alt="Picture <%= i %>">
+			<% } %>
+		<% } %>
+	</div>
+</article>
