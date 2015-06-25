@@ -32,22 +32,26 @@ router.get('/planets', function (req, res) {
   		title: 'Planets',
   		gallery: myGallery,
   		planets: myPlanets,
-  		page: 'planets'
+  		page: 'planetsList'
   	});
 });
 
-/* GET planet with :planetid page. */
+/* GET planet detail page. */
 router.get('/planets/:planetid', function (req, res) {
 	var myGallery = [];
+	var myPlanets = [];
+
 	appdata.planets.forEach( function (item) {
 		if(item.shortname == req.params.planetid) {
+			myPlanets.push(item);
 			myGallery = myGallery.concat(item.gallery);	
 		}
-		
 	});
   	res.render('planets', { 
   		title: 'Planets',
-  		gallery: myGallery
+  		gallery: myGallery,
+  		planets: myPlanets,
+  		page: 'planetDetail'
   	});
 });
 

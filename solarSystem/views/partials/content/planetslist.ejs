@@ -1,15 +1,15 @@
 <article class="speakerslist">
 	<section class="layout">
 		<div class="speakers">
-			<% planets.forEach(function(item){ %>
+			<% planets.forEach( function(item) { %>
 				<article class="artist group">
 					<h3><%= item.title %> <span class="small"> 
 						<a href="/planets/<%= item.shortname %>"><%= item.name %></a></span>
 					</h3>
-					<p><a href="/speakers/<%= item.shortname %>"><img class="speaker" src="/images/speakers/<%= item.shortname %>_tn.jpg" 
+					<p><a href="/planets/<%= item.shortname %>"><img class="speaker" src="/images/planets/<%= item.shortname %>_tn.jpg" 
 						alt="Photo of <%= item.name %>"></a>
 						<% if(page != 'home'){ %>
-							<% if(page === 'artistList'){ %>
+							<% if(page === 'planetList'){ %>
 								<%- item.summary %>
 							<% } else { %>
 								<%- item.description %>
