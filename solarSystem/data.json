@@ -26,24 +26,24 @@
   "social" : [{
     "shortname" : "twitter",
     "img" : "/images/socialmedia/twitter.png",
-    "url" : "http://www.twitter.com/rouxmeet"
+    "url" : "https://twitter.com/NASANewHorizons"
   },{
     "shortname" : "facebook",
     "img" : "/images/socialmedia/facebook.png",
-    "url" : "http://www.facebook.com/rouxmeet"
+    "url" : "https://www.facebook.com/new.horizons"
   },{
     "shortname" : "meetup",
     "img" : "/images/socialmedia/meetup.png",
-    "url" : "http://www.meetup.com/rouxmeet/"
+    "url" : "http://www.meetup.com/solarSystemDemo/"
   }],
 
   "meeting" : {
-    "date": "Thursday, March 27th",
+    "date": "14h July",
     "time": "6-9pm",
     "where": {
-      "name": "Hotel Gwendoline",
-      "img": "/images/misc/hotel_gwendoline.jpg",
-      "address": "123 Elm Street"
+      "name": "New Horizons",
+      "img": "/images/misc/newHorizon_pluto.jpg",
+      "address": "Pluto"
     }
   }
 }
