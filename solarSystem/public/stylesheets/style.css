@@ -245,6 +245,35 @@ header .navigation ul.nav li:hover a {
   color: #f8c64c;
 }
 
+/*
+ footer
+*/
+
+footer {  
+  color: white;
+  text-align: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+footer a:link {
+    color: #aaa;
+}
+
+footer a:visited {
+    color: #aaa;
+}
+
+footer a:hover  {
+    color: #4cae4c;
+}
+
+#alex{
+  vertical-align: 25%;
+}
+
+
+
 @media (min-width: 47em) {
   .layout .primary {
     width: 66.10169%;
