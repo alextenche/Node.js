@@ -11589,18 +11589,18 @@ return jQuery;
 
 },{}],3:[function(require,module,exports){
 module.exports = function alertStars(message){
-  alert("****** " + message + " *****");
+  alert("******--> " + message + "<--*****");
 };
 
 },{}],4:[function(require,module,exports){
 var alertStars = require("./lib/alertstars");
 var _ = require("underscore");
-var $ = require("jquery");
+var $ = require("jquery")
 
 window.onload = function(){
   var messages = [
     "Welcome !",
-    "To my new great page !",
+    "To my new greatest page !",
     "Hope you have fun",
     "And don't forget to subscribe :)"
   ];
@@ -11610,8 +11610,8 @@ window.onload = function(){
   });
 
   _.each(messages, function(message){
-    $("body").append(message);
+    $("body").append($("<p>").text(message));
   });
-}
+};
 
 },{"./lib/alertstars":3,"jquery":1,"underscore":2}]},{},[4]);

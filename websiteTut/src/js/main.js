@@ -5,7 +5,7 @@ var $ = require("jquery");
 window.onload = function(){
   var messages = [
     "Welcome !",
-    "To my new great page !",
+    "To my new greatest page !",
     "Hope you have fun",
     "And don't forget to subscribe :)"
   ];
@@ -15,6 +15,6 @@ window.onload = function(){
   });
 
   _.each(messages, function(message){
-    $("body").append(message);
+    $("body").append($("<p>").text(message));
   });
-}
+};

@@ -1,3 +1,3 @@
 module.exports = function alertStars(message){
-  alert("****** " + message + " *****");
+  alert("******--> " + message + "<--*****");
 };
