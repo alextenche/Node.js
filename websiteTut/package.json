@@ -10,16 +10,30 @@
   },
   "devDependencies": {
     "browserify": "^13.0.1",
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-csslint": "^0.3.1",
     "gulp-jshint": "^2.0.1",
     "gulp-ruby-sass": "^2.0.6",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
+    "mocha": "^2.5.3",
     "vinyl-source-stream": "^1.1.0"
   },
+  "testling": {
+    "harness": "mocha-bdd",
+    "files": "test/.*js",
+    "browsers": [
+      "ie/7..latest",
+      "chrome/latest",
+      "firefox/latest",
+      "safari/latest",
+      "iphone/latest",
+      "android/latest"
+    ]
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "author": "Alex Tenche",
   "license": "ISC"

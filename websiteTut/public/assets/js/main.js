@@ -11595,7 +11595,7 @@ module.exports = function alertStars(message){
 },{}],4:[function(require,module,exports){
 var alertStars = require("./lib/alertstars");
 var _ = require("underscore");
-var $ = require("jquery")
+var $ = require("jquery");
 
 window.onload = function(){
   var messages = [

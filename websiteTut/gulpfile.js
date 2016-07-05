@@ -4,6 +4,7 @@ var source = require("vinyl-source-stream");
 var sass = require("gulp-ruby-sass");
 var jshint = require("gulp-jshint");
 var stylish = require("jshint-stylish");
+var csslint = require("gulp-csslint");
 
 gulp.task("default", function(){
   console.log("gulp working !");
@@ -25,6 +26,8 @@ gulp.task("compile:js", ["jshint"], function(){
 gulp.task("compile:css", function(){
   return sass('./src/scss/*.scss')
     .on('error', sass.logError)
+    .pipe(csslint())
+    .pipe(csslint.reporter())
     .pipe(gulp.dest('./public/assets/css'));
 });
 
