@@ -231,6 +231,7 @@ results
 
 node_modules
 npm-debug.log
+dist
 
 # OS X
 .DS_Store*
