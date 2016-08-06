@@ -27,7 +27,6 @@ router.post('/login', function(req, res, next){
     err.status = 401;
     return next(err);
   }
-  return res.send('Logged In!');
 });
 
 // GET /register
@@ -54,20 +53,37 @@ router.post('/register', function(req, res, next){
       password: req.body.password
     };
 
-    User.create(userData, function (error, user) {
-        if (error) {
-          return next(error);
-        } else {
-          return res.redirect('/profile');
-        }
-      });
+    User.create(userData, function (error, user){
+      if (error) {
+        return next(error);
+      } else {
+        req.session.userId = user._id;
+        return res.redirect('/profile');
+      }
+    });
 
   } else {
     var err = new Error('all fields required');
     err.status = 400;
     return next(err);
   }
-  return res.send('user created');
+});
+
+// GET /profile
+router.get('/profile', function(req, res, next) {
+  if(!req.session.userId){
+    var error = new Error('you are not authorised to view this page !');
+    err.status = 403;
+    return next(err);
+  }
+  User.findById(req.session.userId)
+    .exec(function(error, user){
+      if(error){
+        return next(error);
+      } else {
+        return res.render('profile', { title: 'Profile', name: user.name, favorite: user.favoriteBook });
+      }
+    });
 });
 
 // GET /
