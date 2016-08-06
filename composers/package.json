@@ -10,10 +10,11 @@
   "author": "Alex Tenche",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "1.13.3",
     "express": "4.13.4",
-    "mongoose": "4.5.0",
-    "pug": "2.0.0-beta2",
-    "bcrypt": "0.8.7"
+    "express-session": "^1.14.0",
+    "mongoose": "^4.5.0",
+    "pug": "^2.0.0-beta2"
   }
 }
