@@ -20,7 +20,7 @@ router.get('/contact', function(req, res) {
 
 // GET contact page
 router.get('/profile', function(req, res) {
-  if(req.user) {
+  if (req.user) {
     res.render('profile', { title: 'Profile', user: req.user });
   } else {
     res.redirect("/login");
