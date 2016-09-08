@@ -1,8 +1,5 @@
 'use strict';
 
-// start the application with
-// CLIENT_ID=<github id> CLIENT_SECRET=<github secret> CONSUMER_KEY=<twitter key> CONSUMER_SECRET=<twitter secret> ./bin/www
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,9 +8,32 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var GitHubStrategy = require('passport-github').Strategy;
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var User = require("./models/user");
+
+// configure GitHub Strategy
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: 'http://localhost:3000/auth/github/return'
+}, function(accessToken, refreshToken, profile, done){
+  if(profile.emails[0]){
+    User.findOneAndUpdate({
+      email: profile.emails[0].value
+    }, {
+      name: profile.displayName,
+      email: profile.emails[0].value || profile.username,
+      photo: profile.photos[0].value
+    }, {
+      upsert: true
+    }, done);
+  } else {
+    var noEmailError = new Error('your email privacy settings prevent you from signing in app');
+    done(noEmailError, null);
+  }
+}));
 
 passport.serializeUser(function(user, done){
   done(null, user._id);
@@ -24,6 +44,7 @@ passport.deserializeUser(function(userId, done){
 });
 
 var routes = require('./routes/index');
+var auth = require('./routes/auth');
 
 var app = express();
 
@@ -65,6 +86,7 @@ app.use(passport.session());
 db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use('/', routes);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
