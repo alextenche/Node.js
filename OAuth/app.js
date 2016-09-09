@@ -9,16 +9,13 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var User = require("./models/user");
 
-// configure GitHub Strategy
-passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/auth/github/return'
-}, function(accessToken, refreshToken, profile, done){
+function generateOrFindUser(accessToken, refreshToken, profile, done)
+{
   if(profile.emails[0]){
     User.findOneAndUpdate({
       email: profile.emails[0].value
@@ -33,7 +30,23 @@ passport.use(new GitHubStrategy({
     var noEmailError = new Error('your email privacy settings prevent you from signing in app');
     done(noEmailError, null);
   }
-}));
+}
+
+// configure GitHub Strategy
+passport.use(new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: 'http://localhost:3000/auth/github/return'
+  }, generateOrFindUser
+));
+
+// configure Facebook Strategy
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/return"
+  }, generateOrFindUser
+));
 
 passport.serializeUser(function(user, done){
   done(null, user._id);
