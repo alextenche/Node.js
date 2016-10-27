@@ -24,15 +24,29 @@ http.createServer(function(req, res){
 
   try {
     stats = fs.lstatSync(filename);
-  } catch {
+  } catch (e) {
     res.writeHead(404, {'Content-Type': 'text/plain'});
     res.write('404 Not Found\n');
     res.end();
     return;
   }
 
-  // res.writeHead(200, {'Content-Type': 'text/plain'});
-  // res.end('working server\n');
-}).listen(1337, '127.0.0.1');
+  if (stats.isFile()) {
+    var mimeType = mimeTypes[path.extname(filename).split('.').reverse()[0]];
+    res.writeHead(200, {'Content-Type': mimeType});
 
-console.log('server running at http://127.0.0.1:1337/');
+    var fileStream = fs.createReadStream(filename);
+    fileStream.pipe(res);
+  } else if (stats.isDirectory()) {
+    res.writeHead(302, {
+      'Location': 'index.html'
+    });
+    res.end();
+  } else {
+    res.writeHead('500', {'Content-Type': 'text/plain'});
+    res.write('500 - internal error');
+    res.end();
+  }
+}).listen(3000, '127.0.0.1');
+
+console.log('server running at http://127.0.0.1:3000/');
