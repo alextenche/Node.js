@@ -1,5 +1,9 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
+
+var User = require('../models/user.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -71,12 +75,12 @@ router.post('/register', function(req, res, next){
     });
 
     // create user
-    // User.createUser(newUser, function(err, user){
-      // if (err) {
-        // throw err;
-      // }
-      // console.log(user);
-    // });
+    User.createUser(newUser, function(err, user){
+      if (err) {
+        throw err;
+      }
+      console.log(user);
+    });
 
     // success message
     req.flash('success', 'you are now register and may log in');
