@@ -1,18 +1,18 @@
-'use strict';
-
 var express = require('express');
 var router = express.Router();
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 var User = require('../models/user.js');
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('register', {
-    'title': 'register'
+  res.render('register',{
+  	'title': 'register'
   });
 });
 
@@ -22,8 +22,8 @@ router.get('/login', function(req, res, next) {
   });
 });
 
-router.post('/register', function(req, res, next){
-  let name = req.body.name;
+router.post('/register',function(req, res, next){
+  var name = req.body.name;
   var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
@@ -31,7 +31,6 @@ router.post('/register', function(req, res, next){
 
   // check for image fields
   if (req.files && req.files.profileImage) {
-    console.log('uploading file');
     var profileImageOriginalName = req.files.profileImage.originalname;
     var profileImageName = req.files.profileImage.name;
     var profileImageMime = req.files.profileImage.mimetype;
@@ -39,8 +38,7 @@ router.post('/register', function(req, res, next){
     var profileImageExtension = req.files.profileImage.extension;
     var profileImageSize = req.files.profileImage.size;
   } else {
-    console.log('in else no image');
-    var profileImageName = 'noImage.png';
+    var profileImageName = 'noimage.png';
   }
 
   // form validation
@@ -51,7 +49,6 @@ router.post('/register', function(req, res, next){
   req.checkBody('password', 'password field is required').notEmpty();
   req.checkBody('confirmPassword', 'passwords do not match').equals(req.body.password);
 
-  // check for errors
   var errors = req.validationErrors();
 
   if (errors) {
@@ -63,8 +60,6 @@ router.post('/register', function(req, res, next){
       password: password,
       confirmPassword: confirmPassword
     });
-    // res.send(errors);
-    // return;
   } else {
     var newUser = new User({
       name: name,
