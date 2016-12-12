@@ -123,4 +123,10 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/users/l
     res.redirect('/');
 });
 
+router.get('/logout', function(req, res){
+  req.logout();
+  req.flash('success', 'you have logged out');
+  res.redirect('/users/login');
+});
+
 module.exports = router;

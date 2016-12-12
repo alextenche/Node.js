@@ -18,15 +18,18 @@ html
           ul.nav.navbar-nav
             li(class=(title == 'members' ? 'active' : ''))
               a(href='/') members
-            li(class=(title == 'register' ? 'active' : ''))
-              a(href='/users/register') register
-            li(class=(title == 'login' ? 'active' : ''))
-              a(href='/users/login') log in
+            if !user
+              li(class=(title == 'register' ? 'active' : ''))
+                a(href='/users/register') register
+              li(class=(title == 'login' ? 'active' : ''))
+                a(href='/users/login') log in
           ul.nav.navbar-nav.navbar-right
-            li
-              a(href='/users/logout') logout
+            if user
+              li
+                a(href='/users/logout') logout
 
     .container
+      != messages()
       block content
       
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

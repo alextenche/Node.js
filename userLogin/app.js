@@ -73,10 +73,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
-// ovo ce nam pomoci da sacuvamo user objekat
-// koji ce da vazi za sve rute, pa mozemo da mu pristupimo
-// i kroz layout.jade
 app.get('*', function(req, res, next){
   res.locals.user = req.user || null;
   next();
