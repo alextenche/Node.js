@@ -7,7 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "connect": "1.9.2"
+    "connect": "3.7.0"
   },
   "author": "alexTenche"
 }
